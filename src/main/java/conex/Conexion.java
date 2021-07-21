@@ -6,18 +6,29 @@ import java.sql.*;
 public class Conexion {
     Connection con;
     
-    private static final String JDBC_URL="jdbc:mysql://localhost:3306/blanquearaariel?useSSL=false&useTimeZone=true&serverTimeZone=UTC&allowPublicKeyRetrieval=true";
-    private static final String user="root";
-    private static final String pasw="root";
-    public Conexion(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con=DriverManager.getConnection(JDBC_URL,user,pasw);            
-        } catch (Exception e) {
-            System.err.println("Error"+e);
-        }
-    }
-    public Connection getConnection(){
-        return con;
-    }
+    private static final String JDBC_URL="jdbc:mysql://us-cdbr-east-04.cleardb.com/heroku_4cd07d7ebf44f29?useSSL=false&useTimeZone=true&serverTimeZone=UTC&allowPublicKeyRetrieval=true";
+    private static final String user="b2ed892717d793";
+    private static final String pasw="35bbd94c";
+    
+    
+    public static Connection crearConexion() {
+    	
+    	System.out.println("Llamando conexion");
+    	
+    	Connection con = null;
+    	
+    	try {
+    		Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(JDBC_URL,user,pasw);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Error Otro");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Error clase");
+		}
+    	return con;
+    } 
 }
