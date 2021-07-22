@@ -15,24 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 public class Servlet extends HttpServlet {
 
     String viewForm ="view/formulario.jsp";
+    String viewListarFuero ="view/fuero.jsp";
     String viewIndex = "index.jsp";
     DAOExp exDao = new DAOExp();
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlet Servlet</title>");            
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-        out.println("</body>");
-        out.println("</html>");
-    }
+        	PrintWriter out = response.getWriter();
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Servlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,6 +57,8 @@ public class Servlet extends HttpServlet {
             dir=viewForm;
         }else if(accion.equalsIgnoreCase("list")){
             dir=viewIndex;
+        }else if(accion.equalsIgnoreCase("listarFuero")) {
+        	dir=viewListarFuero;
         }
         RequestDispatcher vista=request.getRequestDispatcher(dir);
         vista.forward(request, response);       
@@ -65,7 +69,11 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {      
     }
 
-
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
