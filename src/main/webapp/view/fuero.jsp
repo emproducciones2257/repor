@@ -54,7 +54,7 @@
 		<header class="container text-dark">
     		<h2 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero</i></h2>  
 			 			 
-			 <form action="/blanqueoAriel/ServletFuero">
+			 <form action="ServletFuero">
 				 <select id="fuerito" name="fuerito">
 			                <option value="laboral">Laboral</option>
 			                <option value="civil">Civil</option>
