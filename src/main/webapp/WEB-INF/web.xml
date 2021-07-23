@@ -10,8 +10,18 @@
   	<description></description>
   	<servlet-class>Controler.Servlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ServletFuero</servlet-name>
+  	<display-name>ServletFuero</display-name>
+  	<description></description>
+  	<servlet-class>Controler.ServletFuero</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Servlet</servlet-name>
   	<url-pattern>/Servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ServletFuero</servlet-name>
+  	<url-pattern>/ServletFuero</url-pattern>
   </servlet-mapping>
 </web-app>

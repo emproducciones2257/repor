@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="blanqueoAriel.Model.Expediente"%>
+<%@page import="MDAO.DAOExp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -37,8 +40,30 @@
 		}
 		</style>
 		
+		<%
+			ArrayList<Expediente> datos = new ArrayList<Expediente>();
+			if(request.getAttribute("datos")!=null){
+				datos = (ArrayList<Expediente>)request.getAttribute("datos");
+			}else{
+				DAOExp expDao = new DAOExp();
+				datos = expDao.listarXFuero("penal");
+			}
+
+		%>
+		
 		<header class="container text-dark">
-    		<h1 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero:</i> </h1>
+    		<h2 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero</i></h2>  
+			 			 
+			 <form action="/blanqueoAriel/ServletFuero">
+				 <select id="fuerito" name="fuerito">
+			                <option value="laboral">Laboral</option>
+			                <option value="civil">Civil</option>
+			                <option value="penal">Penal</option>
+			                <option value="familia">Familia</option>
+		         </select>
+		         
+		         <input type="submit" value="Buscar">								
+			 </form>
 		</header>
 		
 		<table id="tabla">
@@ -48,9 +73,22 @@
 			    <td class="col">Número de Juzgado</td>
 			    <td class="col">Último Movimiento</td>
 			</tr>
-    	</table>
-    	
-    	
+		
+		<%
+			for(Expediente ex : datos){
+		%>
+                <tbody>
+                    <tr> 
+                    	<td><%= ex.getNroExp() %></td>                                              
+                        <td><%= ex.getCara()%></td>
+                        <td><%= ex.getFuero()%></td>
+                        <td><%= ex.getNroJuzgado()%></td>
+                        <td><%= ex.getFeUlUpdate()%></td>
+                    </tr>
+                  <%}%>
+                </tbody>
+            </table>
+    	   	
     	<a href="Servlet?ac=list"> <button class="btn-dark p-2 border-light text-light" id="boton">Volver</button></a>
 
 	</body>

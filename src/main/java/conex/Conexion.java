@@ -13,19 +13,17 @@ public class Conexion {
     
     public static Connection crearConexion() {
     	
-    	System.out.println("Llamando conexion");
-    	
     	Connection con = null;
     	
     	try {
     		Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(JDBC_URL,user,pasw);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			System.out.println("Error Otro");
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			System.out.println("Error clase");
 		}

@@ -82,7 +82,7 @@
             <br><br> 
             </div>            
                 <a href="Servlet?ac=formulario"><button id="nuevo">Crear Expediente</button></a> 
-                <a href="fuero.html"> <button  id="fuero">Listar Por Fuero</button></a>
+                <a href="Servlet?ac=listarFuero"> <button  id="fuero">Listar Por Fuero</button></a>
             </div>
     </body>
 

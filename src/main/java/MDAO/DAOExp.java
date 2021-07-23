@@ -16,6 +16,7 @@ public class DAOExp implements MetodosExpediente{
     // sql
     private static final String sqlInsert="INSERT INTO expe VALUES (NULL,?,?,?,?,?)";
     private static final String sqlGetAll = "SELECT * FROM expe";
+    private static final String sqlGetXFuero = "SELECT * FROM expe WHERE fuero = ?";
 
     private Connection c = null;
     private PreparedStatement pre = null;
@@ -73,4 +74,31 @@ public class DAOExp implements MetodosExpediente{
         }
         return list;
     }
+
+
+	public ArrayList<Expediente> listarXFuero(String fuero) {
+		
+		ArrayList<Expediente> list = new ArrayList<Expediente>();
+        
+        try {
+            c = Conexion.crearConexion();
+            pre = c.prepareStatement(sqlGetXFuero);
+            pre.setString(1, fuero);
+            resul = pre.executeQuery();
+            while (resul.next()) {
+                
+                Expediente e = new Expediente();
+                    e.setIdExp(resul.getLong("idExp"));
+                    e.setNroExp(resul.getString("nroExp"));
+                    e.setCara(resul.getString("cara"));
+                    e.setFuero(resul.getString("fuero"));
+                    e.setNroJuzgado(resul.getString("nroJuzgado"));
+                    e.setFeUlUpdate(resul.getString("feUlUpdate"));
+                    list.add(e);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+	}
 }
