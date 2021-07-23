@@ -24,11 +24,9 @@ public class ServletFuero extends HttpServlet {
 		String dir="";
 		
         String fuero = request.getParameter("fuerito");
-    	System.out.println("El fuero es " + request.getParameter("item"));
     	ArrayList<Expediente> todos = exDao.listarXFuero(fuero);
     	request.setAttribute("datos", todos);
-    	
-    	request.setAttribute("datos", todos);
+
     	dir = viewListarFuero;
     	
     	RequestDispatcher vista=request.getRequestDispatcher(dir);
