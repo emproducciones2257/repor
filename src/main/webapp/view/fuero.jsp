@@ -27,7 +27,17 @@
 		    font-size: 1.5vw;
 		    border: 0.1vw solid black;
 		    background: linear-gradient(white, grey);
-    
+		    font-weight: bold;
+		       
+		}
+		.item {
+		    padding: 0.7vw;
+		    margin: 0.5vw;
+		    font-family: inherit;
+		    font-size: 1.5vw;
+		    border: 0.1vw solid black;
+		    background: linear-gradient(white, grey);
+
 		}
 
 		table {margin-left: 23vw;}
@@ -80,10 +90,10 @@
 		%>
                 <tbody>
                     <tr> 
-                    	<td class="col"><%= ex.getNroExp() %></td>                                              
-                        <td class="col"><%= ex.getCara()%></td>                        
-                        <td class="col"><%= ex.getNroJuzgado()%></td>
-                        <td class="col"><%= ex.getFeUlUpdate()%></td>
+                    	<td class="item"><%= ex.getNroExp() %></td>                                              
+                        <td class="item"><%= ex.getCara()%></td>                        
+                        <td class="item"><%= ex.getNroJuzgado()%></td>
+                        <td class="item"><%= ex.getFeUlUpdate()%></td>
                     </tr>
                   <%}%>
                 </tbody>
