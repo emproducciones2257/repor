@@ -29,7 +29,7 @@
 		    background: linear-gradient(white, grey);
     
 		}
-		
+
 		table {margin-left: 23vw;}
 		
 		#titulo {margin-left: 30vw;}
@@ -52,8 +52,8 @@
 		%>
 		
 		<header class="container text-dark">
-    		<h2 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero</i></h2>  
-			 			 
+    		<h2 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero</i>  
+			 	<br>		 
 			 <form action="ServletFuero">
 				 <select id="fuerito" name="fuerito">
 			                <option value="laboral">Laboral</option>
@@ -62,8 +62,9 @@
 			                <option value="familia">Familia</option>
 		         </select>
 		         
-		         <input type="submit" value="Buscar">								
+		         <input type="submit" value="Buscar" class="btn-dark p-2 border-light text-light">								
 			 </form>
+			 </h2>
 		</header>
 		
 		<table id="tabla">
@@ -79,11 +80,10 @@
 		%>
                 <tbody>
                     <tr> 
-                    	<td><%= ex.getNroExp() %></td>                                              
-                        <td><%= ex.getCara()%></td>
-                        <td><%= ex.getFuero()%></td>
-                        <td><%= ex.getNroJuzgado()%></td>
-                        <td><%= ex.getFeUlUpdate()%></td>
+                    	<td class="col"><%= ex.getNroExp() %></td>                                              
+                        <td class="col"><%= ex.getCara()%></td>                        
+                        <td class="col"><%= ex.getNroJuzgado()%></td>
+                        <td class="col"><%= ex.getFeUlUpdate()%></td>
                     </tr>
                   <%}%>
                 </tbody>
