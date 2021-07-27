@@ -17,6 +17,8 @@ public class DAOExp implements MetodosExpediente{
     private static final String sqlInsert="INSERT INTO expe VALUES (NULL,?,?,?,?,?)";
     private static final String sqlGetAll = "SELECT * FROM expe";
     private static final String sqlGetXFuero = "SELECT * FROM expe WHERE fuero = ?";
+    private static final String sqlGetXId = "SELECT * FROM expe WHERE idExp = ?";
+    private static final String sqlUpdate ="UPDATE expe SET nroExp=?,cara=?,fuero=?,nroJuzgado=?,feUlUpdate=? WHERE idExp=?";
 
     private Connection c = null;
     private PreparedStatement pre = null;
@@ -49,7 +51,6 @@ public class DAOExp implements MetodosExpediente{
             }           
         }        
     }   
-
     
     public ArrayList<Expediente> listarTodo() {
         ArrayList<Expediente> list = new ArrayList<Expediente>();
@@ -100,5 +101,56 @@ public class DAOExp implements MetodosExpediente{
             System.out.println(e.getMessage());
         }
         return list;
+	}
+
+
+	public Expediente expeXId(Integer id) {
+		Expediente e = new Expediente();
+		
+        try {
+            c = Conexion.crearConexion();
+            pre = c.prepareStatement(sqlGetXId);
+            pre.setInt(1, id);
+            resul = pre.executeQuery();
+            while (resul.next()) {
+                e.setIdExp(resul.getLong("idExp"));
+                e.setNroExp(resul.getString("nroExp"));
+                e.setCara(resul.getString("cara"));
+                e.setFuero(resul.getString("fuero"));
+                e.setNroJuzgado(resul.getString("nroJuzgado"));
+                e.setFeUlUpdate(resul.getString("feUlUpdate"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return e;
+	}
+
+
+	public void actualizarExpediente(Expediente exp) {
+		
+		 con = new Conexion();
+	        try {
+	            c = Conexion.crearConexion();
+	            pre = c.prepareStatement(sqlUpdate);
+	            pre.setString(1, exp.getNroExp());
+	            pre.setString(2, exp.getCara());
+	            pre.setString(3, exp.getFuero());
+	            pre.setString(4, exp.getNroJuzgado());
+	            pre.setString(5, exp.getFeUlUpdate());
+	            pre.setLong(6, exp.getIdExp());
+	            pre.executeUpdate();
+	   
+	        } catch (SQLException ex) {
+	            Logger.getLogger(DAOExp.class.getName()).log(Level.SEVERE, null, ex);
+	        }
+	        finally{
+	            try {
+	                pre.close();
+	                c.close();
+	            } catch (SQLException ex) {
+	                Logger.getLogger(DAOExp.class.getName()).log(Level.SEVERE, null, ex);
+	            }           
+	        }        		
 	}
 }

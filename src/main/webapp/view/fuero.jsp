@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="blanqueoAriel.Model.Expediente"%>
 <%@page import="MDAO.DAOExp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -50,27 +51,16 @@
 		}
 		</style>
 		
-		<%
-			ArrayList<Expediente> datos = new ArrayList<Expediente>();
-			if(request.getAttribute("datos")!=null){
-				datos = (ArrayList<Expediente>)request.getAttribute("datos");
-			}else{
-				DAOExp expDao = new DAOExp();
-				datos = expDao.listarXFuero("penal");
-			}
-
-		%>
-		
 		<header class="container text-dark">
     		<h2 class="h4 p-1 mb-4 mt-4 " id="titulo" > <i>Expedientes en el Fuero</i>  
 			 	<br>		 
 			 <form action="ServletFuero">
-				 <select id="fuerito" name="fuerito">
-			                <option value="laboral">Laboral</option>
-			                <option value="civil">Civil</option>
-			                <option value="penal">Penal</option>
-			                <option value="familia">Familia</option>
-		         </select>
+				 		         
+		         <select id="fuerito" name="fuerito">
+    				<c:forEach var="item" items="${Expediente.fueroLista}">
+        				<option value="${item}" ${item.toUpperCase() == fueroElegido.toUpperCase() ? 'selected="selected"' : ''}>${item}</option>
+    				</c:forEach>
+				</select>
 		         
 		         <input type="submit" value="Buscar" class="btn-dark p-2 border-light text-light">								
 			 </form>
@@ -83,10 +73,11 @@
 			    <td class="col"> Carátula</td>
 			    <td class="col">Número de Juzgado</td>
 			    <td class="col">Último Movimiento</td>
+			    <td class="col">Acción</td>
 			</tr>
 		
 		<%
-			for(Expediente ex : datos){
+			for(Expediente ex : (ArrayList<Expediente>)request.getAttribute("todosExpedientes")){
 		%>
                 <tbody>
                     <tr> 
@@ -94,6 +85,10 @@
                         <td class="item"><%= ex.getCara()%></td>                        
                         <td class="item"><%= ex.getNroJuzgado()%></td>
                         <td class="item"><%= ex.getFeUlUpdate()%></td>
+                        <td class="item">
+                        	<a class="text-succes" href=ServletFuero?update=<%= ex.getIdExp() %>> Modificar</a>
+                        	<a class="text-danger" href=ServletFuero?delete=<%= ex.getIdExp() %>>Eliminar</a>
+                        </td>
                     </tr>
                   <%}%>
                 </tbody>

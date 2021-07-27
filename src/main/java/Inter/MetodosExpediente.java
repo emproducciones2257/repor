@@ -12,4 +12,8 @@ public interface MetodosExpediente {
     ArrayList<Expediente> listarTodo();
     
     ArrayList<Expediente> listarXFuero(String fuero);
+    
+    Expediente expeXId(Integer id);
+    
+    void actualizarExpediente(Expediente exp);
 }

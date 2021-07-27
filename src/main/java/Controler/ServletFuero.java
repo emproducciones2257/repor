@@ -18,18 +18,60 @@ public class ServletFuero extends HttpServlet {
 
 	private DAOExp exDao = new DAOExp();  
 	private String viewListarFuero ="view/fuero.jsp";
+	private String viewEditFuero ="view/modificar.jsp";
+	private String viewIndex = "index.jsp";
+	private String dir="";
+	private DAOExp expDao = new DAOExp();
 	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dir="";
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
-        String fuero = request.getParameter("fuerito");
-    	ArrayList<Expediente> todos = exDao.listarXFuero(fuero);
-    	request.setAttribute("datos", todos);
+		if((request.getParameter("update")==null) && 
+				(request.getParameter("delete")==null) &&
+				(request.getParameter("editarRegistro")==null) &&
+				(request.getParameter("volver")==null)) {
+					
+			ArrayList<Expediente> todos = exDao.listarXFuero(request.getParameter("fuerito"));
+			request.setAttribute("todosExpedientes", todos);
+			request.setAttribute("fueroElegido", request.getParameter("fuerito"));
+			
+			dir = viewListarFuero;			
+			
+			RequestDispatcher vista=request.getRequestDispatcher(dir);
+	        vista.forward(request, response);
+	        
+		}else if (request.getParameter("update")!=null) {
 
-    	dir = viewListarFuero;
-    	
-    	RequestDispatcher vista=request.getRequestDispatcher(dir);
-        vista.forward(request, response);  
+			Expediente expeEditar = expDao.expeXId(Integer.valueOf(request.getParameter("update"))); 
+			request.setAttribute("datoActualizar", expeEditar);
+			
+			dir = viewEditFuero;
+			RequestDispatcher vista=request.getRequestDispatcher(dir);
+	        vista.forward(request, response);
+			
+		}else if (request.getParameter("editarRegistro")!=null) {
+			Expediente ex = new Expediente();
+			
+			ex.setIdExp(Long.parseLong(request.getParameter("idEditar")));
+            ex.setNroExp(request.getParameter("nroExpe"));
+            ex.setCara(request.getParameter("cara"));
+            ex.setFuero(request.getParameter("fuero"));
+            ex.setNroJuzgado(request.getParameter("nroJuz"));
+            ex.setFeUlUpdate(request.getParameter("fecha"));           
+            
+            exDao.actualizarExpediente(ex);
+            
+			ArrayList<Expediente> todos = exDao.listarXFuero(request.getParameter("fuero"));
+			request.setAttribute("todosExpedientes", todos);
+			request.setAttribute("fueroElegido", request.getParameter("fuero"));
+            
+			dir = viewListarFuero;
+			RequestDispatcher vista=request.getRequestDispatcher(dir);
+	        vista.forward(request, response);
+		}else if (request.getParameter("volver")!=null) {
+			
+			dir = viewIndex;
+			RequestDispatcher vista=request.getRequestDispatcher(dir);
+	        vista.forward(request, response);
+		}
 	}
 }

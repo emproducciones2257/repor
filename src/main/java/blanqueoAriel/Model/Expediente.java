@@ -1,8 +1,12 @@
 package blanqueoAriel.Model;
 
+import java.util.Arrays;
+import java.util.List;
 
 public class Expediente {
     
+	public static final List<String> fueroLista = Arrays.asList("Laboral","Civil","Penal","Familia");
+	
     private long idExp;
     private String nroExp;
     private String cara;

@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="blanqueoAriel.Model.Expediente"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,12 +60,12 @@
             <input name="cara" type="text" class="formulario_" placeholder="carátula.."required> <br>
             
             <p class="datos">Fuero:</p>
+            
             <select name="fuero" class="formulario_"><br>
-                <option class="formulario_" value="laboral">Laboral</option>
-                <option class="formulario_" value="civil">Civil</option>
-                <option class="formulario_" value="penal">Penal</option>
-                <option class="formulario_" value="familia">Familia</option>
-            </select><br>
+    			<c:forEach var="item" items="${Expediente.fueroLista}">
+        			<option class="formulario_" value="${item}">${item}</option>
+    			</c:forEach>
+			</select><br>
             
             <p class="datos">Número de juzgado:</p>
             <input name="nroJuz" type="number" class="formulario_" placeholder="juzgado número.." required> <br>

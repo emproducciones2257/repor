@@ -64,14 +64,13 @@ public class Servlet extends HttpServlet {
                 
             }else if(accion.equalsIgnoreCase("listarFuero")) {       	
             	ArrayList<Expediente> todos = exDao.listarTodo();
-            	request.setAttribute("datos", todos);
+            	request.setAttribute("todosExpedientes", todos);           	
             	dir=viewListarFuero;
             	
             }else if(accion.equalsIgnoreCase("buscar")) {
-            	//String fuero = request.getParameter("fuerito");
-            	System.out.println("El fuero es " + request.getParameter("item"));
-            	//ArrayList<Expediente> todos = exDao.listarXFuero(fuero);
-            	//request.setAttribute("datos", todos);
+            	ArrayList<Expediente> datos = new ArrayList<Expediente>();
+            	datos = exDao.listarTodo();
+            	request.setAttribute("todosExpedientes", datos); 
             	dir=viewListarFuero;
             }else {
             	  		
