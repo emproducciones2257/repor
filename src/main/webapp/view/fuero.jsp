@@ -88,6 +88,7 @@
                         <td class="item">
                         	<a class="text-succes" href=ServletFuero?update=<%= ex.getIdExp() %>> Modificar</a>
                         	<a class="text-danger" href=ServletFuero?delete=<%= ex.getIdExp() %>>Eliminar</a>
+                        	<%  session.setAttribute("fueroEliminado", ex.getFuero());%>
                         </td>
                     </tr>
                   <%}%>

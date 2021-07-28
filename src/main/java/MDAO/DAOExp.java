@@ -19,6 +19,7 @@ public class DAOExp implements MetodosExpediente{
     private static final String sqlGetXFuero = "SELECT * FROM expe WHERE fuero = ?";
     private static final String sqlGetXId = "SELECT * FROM expe WHERE idExp = ?";
     private static final String sqlUpdate ="UPDATE expe SET nroExp=?,cara=?,fuero=?,nroJuzgado=?,feUlUpdate=? WHERE idExp=?";
+    private static final String sqlDelete ="DELETE FROM expe WHERE idExp=? ";
 
     private Connection c = null;
     private PreparedStatement pre = null;
@@ -152,5 +153,27 @@ public class DAOExp implements MetodosExpediente{
 	                Logger.getLogger(DAOExp.class.getName()).log(Level.SEVERE, null, ex);
 	            }           
 	        }        		
+	}
+
+	public void eliminarExpediente(Long idExp) {
+		
+		con = new Conexion();
+        try {
+            c = Conexion.crearConexion();
+            pre = c.prepareStatement(sqlDelete);
+            pre.setLong(1, idExp);
+            pre.execute();
+   
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOExp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            try {
+                pre.close();
+                c.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOExp.class.getName()).log(Level.SEVERE, null, ex);
+            }           
+        }        				
 	}
 }

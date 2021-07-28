@@ -22,6 +22,8 @@ public class ServletFuero extends HttpServlet {
 	private String viewIndex = "index.jsp";
 	private String dir="";
 	private DAOExp expDao = new DAOExp();
+	private String fueroElegido = "";
+	private ArrayList<Expediente> todos = new ArrayList<Expediente>();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
@@ -29,15 +31,18 @@ public class ServletFuero extends HttpServlet {
 				(request.getParameter("delete")==null) &&
 				(request.getParameter("editarRegistro")==null) &&
 				(request.getParameter("volver")==null)) {
-					
-			ArrayList<Expediente> todos = exDao.listarXFuero(request.getParameter("fuerito"));
+			
+			fueroElegido =	request.getParameter("fuerito");
+			
+			todos = exDao.listarXFuero(request.getParameter("fuerito"));
 			request.setAttribute("todosExpedientes", todos);
-			request.setAttribute("fueroElegido", request.getParameter("fuerito"));
+			request.setAttribute("fueroElegido", fueroElegido);
 			
 			dir = viewListarFuero;			
 			
 			RequestDispatcher vista=request.getRequestDispatcher(dir);
 	        vista.forward(request, response);
+	        fueroElegido="";
 	        
 		}else if (request.getParameter("update")!=null) {
 
@@ -60,18 +65,36 @@ public class ServletFuero extends HttpServlet {
             
             exDao.actualizarExpediente(ex);
             
-			ArrayList<Expediente> todos = exDao.listarXFuero(request.getParameter("fuero"));
+            fueroElegido = request.getParameter("fuero");
+			todos = exDao.listarXFuero(fueroElegido);
+			
 			request.setAttribute("todosExpedientes", todos);
-			request.setAttribute("fueroElegido", request.getParameter("fuero"));
+			request.setAttribute("fueroElegido", fueroElegido);
             
 			dir = viewListarFuero;
 			RequestDispatcher vista=request.getRequestDispatcher(dir);
 	        vista.forward(request, response);
+	        
 		}else if (request.getParameter("volver")!=null) {
 			
 			dir = viewIndex;
 			RequestDispatcher vista=request.getRequestDispatcher(dir);
 	        vista.forward(request, response);
+	        
+		}else if (request.getParameter("delete")!=null) {
+			
+			fueroElegido = request.getSession().getAttribute("fueroEliminado").toString();
+			
+			exDao.eliminarExpediente(Long.valueOf(request.getParameter("delete")));
+			todos = exDao.listarXFuero(fueroElegido);
+			
+			request.setAttribute("todosExpedientes", todos);
+			request.setAttribute("fueroElegido", fueroElegido);
+			
+			dir = viewListarFuero;
+			RequestDispatcher vista=request.getRequestDispatcher(dir);
+	        vista.forward(request, response);
+
 		}
 	}
 }

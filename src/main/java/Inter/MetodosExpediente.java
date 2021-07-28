@@ -16,4 +16,6 @@ public interface MetodosExpediente {
     Expediente expeXId(Integer id);
     
     void actualizarExpediente(Expediente exp);
+    
+    void eliminarExpediente(Long idExp);
 }
