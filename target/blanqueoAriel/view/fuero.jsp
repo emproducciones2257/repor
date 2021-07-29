@@ -72,8 +72,7 @@
 			    <td class="col">Número de Expediente</td>
 			    <td class="col"> Carátula</td>
 			    <td class="col">Número de Juzgado</td>
-			    <td class="col">Último Movimiento</td>
-			    <td class="col">Acción</td>
+			    <td class="col">Último Movimiento</td>			    
 			</tr>
 		
 		<%
@@ -84,12 +83,7 @@
                     	<td class="item"><%= ex.getNroExp() %></td>                                              
                         <td class="item"><%= ex.getCara()%></td>                        
                         <td class="item"><%= ex.getNroJuzgado()%></td>
-                        <td class="item"><%= ex.getFeUlUpdate()%></td>
-                        <td class="item">
-                        	<a class="text-succes" href=ServletFuero?update=<%= ex.getIdExp() %>> Modificar</a>
-                        	<a class="text-danger" href=ServletFuero?delete=<%= ex.getIdExp() %>>Eliminar</a>
-                        	<%  session.setAttribute("fueroEliminado", ex.getFuero());%>
-                        </td>
+                        <td class="item"><%= ex.getFeUlUpdate()%></td>                        
                     </tr>
                   <%}%>
                 </tbody>
@@ -97,6 +91,5 @@
     	   	
     	<a href="Servlet?ac=list"> <button class="btn-dark p-2 border-light text-light" id="boton">Volver</button></a>
 
-	</body>
-	
+	</body>	
 </html>
