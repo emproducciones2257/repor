@@ -65,13 +65,9 @@ public class ServletFuero extends HttpServlet {
             
             exDao.actualizarExpediente(ex);
             
-            fueroElegido = request.getParameter("fuero");
-			todos = exDao.listarXFuero(fueroElegido);
-			
-			request.setAttribute("todosExpedientes", todos);
-			request.setAttribute("fueroElegido", fueroElegido);
+			todos = exDao.listarTodo();
             
-			dir = viewListarFuero;
+			dir = viewIndex;
 			RequestDispatcher vista=request.getRequestDispatcher(dir);
 	        vista.forward(request, response);
 	        
@@ -86,15 +82,11 @@ public class ServletFuero extends HttpServlet {
 			fueroElegido = request.getSession().getAttribute("fueroEliminado").toString();
 			
 			exDao.eliminarExpediente(Long.valueOf(request.getParameter("delete")));
-			todos = exDao.listarXFuero(fueroElegido);
+			todos = exDao.listarTodo();
 			
-			request.setAttribute("todosExpedientes", todos);
-			request.setAttribute("fueroElegido", fueroElegido);
-			
-			dir = viewListarFuero;
+			dir = viewIndex;
 			RequestDispatcher vista=request.getRequestDispatcher(dir);
 	        vista.forward(request, response);
-
 		}
 	}
 }

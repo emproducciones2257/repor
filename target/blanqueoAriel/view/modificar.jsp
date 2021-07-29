@@ -72,7 +72,7 @@
 			</select><br>
                      
             <p class="datos">Número de juzgado:</p>
-            <input name="nroJuz" type="number" class="formulario_" value='${datoActualizar.getNroJuzgado()}' required> required> <br>
+            <input name="nroJuz" type="number" class="formulario_" value='${datoActualizar.getNroJuzgado()}' required> <br>
 
             <p class="datos">Fecha de última actualización:</p>
             <input name="fecha" type="date" class="formulario_" value='${datoActualizar.getFeUlUpdate()}' required> <br>

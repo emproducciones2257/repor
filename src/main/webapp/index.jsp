@@ -59,6 +59,7 @@
                         <th scope="col">Fuero</th>
                         <th scope="col">Numero de Juzgado</th>
                         <th scope="col">Ultima Actualizacion</th>
+                        <td class="col">Acción</td>
                     </tr>
                 </thead>
                 <%
@@ -75,6 +76,11 @@
                         <td><%= ex.getFuero()%></td>
                         <td><%= ex.getNroJuzgado()%></td>
                         <td><%= ex.getFeUlUpdate()%></td>
+                        <td>
+                        	<a class="text-succes" href=ServletFuero?update=<%= ex.getIdExp() %>> Modificar</a>
+                        	<a class="text-danger" href=ServletFuero?delete=<%= ex.getIdExp() %>>Eliminar</a>
+                        	<%  session.setAttribute("fueroEliminado", ex.getFuero());%>
+                        </td>
                     </tr>
                   <%}}%>
                 </tbody>
