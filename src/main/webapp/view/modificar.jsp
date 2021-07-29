@@ -3,8 +3,7 @@
 <%@page import="MDAO.DAOExp"%>
 <%@page import="blanqueoAriel.Model.Expediente"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -61,7 +60,7 @@
             <p class="datos">Numero de Expediente:</p>
             <input name="nroExpe" type="number" class="formulario_" value='${datoActualizar.getNroExp()}' required> <br>
 
-            <p class="datos">Carátula:</p>
+            <p class="datos">CarÃ¡tula:</p>
             <input name="cara" type="text" class="formulario_"  value='${datoActualizar.getCara()}' required> <br>
             
             <p class="datos">Fuero:</p>
@@ -71,10 +70,10 @@
     			</c:forEach>
 			</select><br>
                      
-            <p class="datos">Número de juzgado:</p>
+            <p class="datos">NÃºmero de juzgado:</p>
             <input name="nroJuz" type="number" class="formulario_" value='${datoActualizar.getNroJuzgado()}' required> <br>
 
-            <p class="datos">Fecha de última actualización:</p>
+            <p class="datos">Fecha de Ãºltima actualizaciÃ³n:</p>
             <input name="fecha" type="date" class="formulario_" value='${datoActualizar.getFeUlUpdate()}' required> <br>
 
             <input name="idEditar" style="display: none;" value='${datoActualizar.getIdExp()}'>
@@ -88,7 +87,7 @@
 	
 	<footer>
 	    <p class="font-weight-bold text-uppercase text-white p-0 m-0" >Pagina Web creada por:</p>
-	    <p class="font-weight-bold text-white mt-3 mb-4"> Emanuel Marquez, Ariel, Rocío Martin</p>
+	    <p class="font-weight-bold text-white mt-3 mb-4"> Emanuel Marquez, Ariel, RocÃ­o Martin</p>
 	</footer>
 	
 </html>
